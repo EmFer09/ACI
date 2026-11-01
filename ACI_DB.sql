@@ -60,3 +60,4 @@ ALTER TABLE salas_favoritas
 ADD CONSTRAINT fk_salasfav_sala
  FOREIGN KEY (sala_id) REFERENCES salas (sala_id)
  ON DELETE RESTRICT;
+
