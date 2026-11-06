@@ -1,0 +1,110 @@
+import requests
+from bs4 import BeautifulSoup
+import pandas as pd
+from urllib.parse import urljoin
+import pypdfium2 as pdfium
+
+categoria="película" 
+sala_id=3
+
+url= "https://www.cinetecamadrid.com/programacion?to=today"
+
+#Esta página daba error 403 al hacer la petición, por lo que se añade un header para que la petición se haga como si fuera un navegador web
+headers = {
+    "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3"
+}
+
+#y se hace la petición con el header dentro de un bucle if else por si falla
+response = requests.get(url, headers=headers)
+if response.status_code == 200:
+    soup = BeautifulSoup(response.content, "html.parser")
+else:
+    print(f"Error al acceder a la página: {response.status_code}")
+
+#tras encontrar mediante pruebas de qué elemento sale el link que interesa se obtiene mediante una cadena de variables, "desenredando" los elementos que lo contienen hasta llegar a la dirección
+links = soup.find('div', class_="messages--notification")
+enlace = links.find('a')
+descarga_pdf = enlace.get('href')
+#como el enlace que obtenemos es una ruta relativa, el método get da error porque falta el servidor, para solucionarlo se usa urljoin
+enlace_bueno = urljoin(url, descarga_pdf)
+
+#una vez localizado el link de descarga, se inicia la descarga mediante requests usando los headers de nuevo para evitar otro error
+response_pdf = requests.get(enlace_bueno, headers= headers)
+
+if response_pdf.status_code == 200:
+    with open("PROGRAMA-CALENDARIO_NOV26_CINETECA.pdf", "wb") as f:
+        f.write(response_pdf.content)
+else:
+    print("Error")
+
+#para extraer los datos del pdf descargados se usa la biblioteca pypdfium2
+text = "\n".join(
+    p.get_textpage().get_text_range() 
+    for p in pdfium.PdfDocument("PROGRAMA-CALENDARIO_NOV26_CINETECA.pdf")
+)
+
+#se preparan las variables que interesan para la extracción al .csv
+columnas = ['nombre', 'sala_id', 'descripcion', 'fecha_inicio', 'hora', 'categoria']
+data = []
+
+#el texto está sin formato por lo que es más difícil encontrar los datos que interesan, para encontrar la fecha se crea una lista con los días de la semana para encontrar las líneas de
+#texto que hacen referencia a fechas
+dias_semana = ["LUNES", "MARTES", "MIÉRCOLES", "JUEVES", "VIERNES", "SÁBADO", "DOMINGO"]
+
+for dia in dias_semana:
+    if dia in text:
+        fecha = text.find(dia)
+
+#para extraer el mes pasa lo mismo que en main2_cba:
+meses = {
+        "ENE": "01",
+        "FEB": "02",
+        "MAR": "03",
+        "ABR": "04",
+        "MAY": "05",
+        "JUN": "06",
+        "JUL": "07",
+        "AGO": "08",
+        "SEP": "09",
+        "OCT": "10",
+        "NOV": "11",
+        "DIC": "12"
+    }
+
+#es necesario separar el texto en líneas y estas en palabras para delimitar los resultados
+for linea in text.splitlines():
+ 
+    """ costó ubicar "NOV 26" ya que parecía ser una línea de 2 palabras pero iba junto a "CALENDARIO" entonces mediante el siguiente if se ubicó que era una línea de 3 palabras
+          if "NOV" in linea:
+        print(repr(linea)) """
+    
+    palabras = linea.strip().split()
+    
+    #ahora aprovechando el mismo bucle que delimita las líneas en frases de dos palabras buscamos el mes que está indicado una vez como "NOV 26"
+    if len(palabras) >= 3:
+        if palabras[1] in meses and palabras[2].isdigit() and len(palabras[2]) == 2:
+            fecha_mes = meses[palabras[1]]
+            fecha_anio = "20" + palabras[2]
+    
+for linea in text.splitlines():
+    palabras = linea.strip().split()
+    #después comprobamos si los elementos de esa línea (las palabras) son alguno de los días de la semana
+    if len(palabras) >= 2:
+        if palabras[0] in dias_semana:
+            fecha_dia = palabras[1]
+            fecha_inicio = f"{fecha_anio}-{fecha_mes}-{fecha_dia}"
+            print(fecha_inicio)
+
+#Ahora se busca la hora
+for linea in text.splitlines():
+    palabras = linea.strip().split()
+    if palabras:
+        if (
+            len(palabras[0]) == 5 
+            and palabras[0][0].isdigit()
+            and palabras[0][1].isdigit()
+            and palabras[0][2] == ":"
+            and palabras[0][3].isdigit()
+            and palabras[0][4].isdigit()
+        ):
+            print(palabras[0])     
