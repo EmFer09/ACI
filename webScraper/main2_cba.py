@@ -1,6 +1,9 @@
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+import mysql.connector
+import os 
+from dotenv import load_dotenv
 
 url= "https://www.circulobellasartes.com/cine-estudio/"
 
@@ -17,7 +20,7 @@ contenedor = soup.find_all('div', class_="cba_cine_table_container")
 #esta web no ofrece información con la sinopsis o descripción de cada película entonces se declara una variable vacía para este campo (en la tabla eventos esta columna puede ser NULL)
 descripcion =""
 
-columnas = ['nombre', 'sala_id', 'descripcion', 'fecha_inicio', 'hora', 'categoria']
+columnas = ['nombre', 'sala_id', 'fecha_inicio', 'categoria', 'descripcion', 'hora']
 data = []
 
 for contenedor in contenedor:
@@ -49,7 +52,7 @@ for contenedor in contenedor:
     #dia_mes se separa en dos partes más, guardando la primera en dia_num (que corresponde al día del mes) y la segunda en mes (que sería en este caso "Nov")
     dia_num, mes = dia_mes.split()
     #se construye la fecha en formato "YYYY-MM-DD" usando el año 2026, el mes transformado a número gracias al diccionario meses y el día con dos dígitos
-    fecha_inicio=f"2026-{meses[mes]}-{int(dia_num):02d}"
+    fecha_inicio = f"2026-{meses[mes]}-{int(dia_num):02d}"
 
     
     if titulo and hora and dia:
@@ -60,11 +63,40 @@ for contenedor in contenedor:
             print(f"Fecha: {fecha_inicio}")
             print(f"Hora: {hora}")
             print("-" * 40)
-            data.append([nombre, sala_id, descripcion, fecha_inicio, hora, categoria])
+            data.append([nombre, sala_id, fecha_inicio, categoria, descripcion, hora])
 
     else:
         print("No hay información disponible.")
 
 df = pd.DataFrame(data, columns=columnas) 
 df.to_csv("webScraper/datos/eventos2.csv", index=False, encoding="utf-8-sig")
-print("Todo bien")
+print("Todo bien con el scraper")
+
+#Ahora se crea el conector a la base de datos protegiando las claves en un archivo .env
+load_dotenv()
+
+conexion = mysql.connector.connect(
+     host = os.getenv("DB_HOST"),
+     user = os.getenv("DB_USER"),
+     password = os.getenv("DB_PASSWORD"),
+     database = os.getenv("DB_NAME")
+)
+
+cursor = conexion.cursor()
+
+csv_file = 'webScraper/datos/eventos2.csv'
+
+datos = pd.read_csv(csv_file)
+#el valor vacío de la columna descripción provoca un error al migrar a MySQL ya que Python lo interpreta como Nan y no se traduce a NULL en MySQL
+
+for index, row in datos.iterrows():
+    cursor.execute(
+        "INSERT INTO eventos (nombre, sala_id, fecha_inicio, hora, categoria) VALUES (%s, %s, %s, %s, %s)",
+        (row['nombre'], row['sala_id'], row['fecha_inicio'], row['hora'], row['categoria'])
+    )
+
+conexion.commit()
+print("Todo ok")
+
+cursor.close()
+conexion.close() 

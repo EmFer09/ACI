@@ -1,17 +1,31 @@
-﻿nombre,sala_id,descripcion,fecha_inicio,hora,categoria
-Chicho o mientras el cuerpo aguante (una comedia didáctica),2,,2026-11-04,17:00,película
-Piscina por la tarde,2,,2026-11-04,19:00,película
-Blue Heron,2,,2026-11-04,22:00,película
-NAZA,2,,2026-11-05,17:00,película
-Isla indómita,2,,2026-11-05,19:30,película
-Piscina por la tarde,2,,2026-11-05,22:00,película
-Blue Heron,2,,2026-11-06,17:00,película
-Piscina por la tarde,2,,2026-11-06,19:00,película
-La bola negra,2,,2026-11-06,21:30,película
-NAZA,2,,2026-11-07,17:00,película
-El rayo verde: La noche del cazador,2,,2026-11-07,20:00,película
-La noche está marchándose ya,2,,2026-11-07,22:00,película
-Blue Heron,2,,2026-11-08,17:00,película
-La noche está marchándose ya,2,,2026-11-08,19:00,película
-Hope: el primer impacto,2,,2026-11-08,21:30,película
-Franz,2,,2026-11-09,19:00,película
+﻿nombre,sala_id,fecha_inicio,categoria,descripcion,hora
+Chicho o mientras el cuerpo aguante (una comedia didáctica),2,2026-11-04,película,,17:00
+NAZA,2,2026-11-05,película,,17:00
+Isla indómita,2,2026-11-05,película,,19:30
+Piscina por la tarde,2,2026-11-05,película,,22:00
+Blue Heron,2,2026-11-06,película,,17:00
+Piscina por la tarde,2,2026-11-06,película,,19:00
+La bola negra,2,2026-11-06,película,,21:30
+NAZA,2,2026-11-07,película,,17:00
+"Presentación del libro `Los ojos verdes´, de Marguerite Duras",2,2026-11-07,película,,19:00
+El rayo verde: La noche del cazador,2,2026-11-07,película,,20:00
+La noche está marchándose ya,2,2026-11-07,película,,22:00
+Blue Heron,2,2026-11-08,película,,17:00
+La noche está marchándose ya,2,2026-11-08,película,,19:00
+Hope: el primer impacto,2,2026-11-08,película,,21:30
+El misterio de Lucy Lost,2,2026-11-09,película,,17:00
+Franz,2,2026-11-09,película,,19:00
+NAZA,2,2026-11-09,película,,21:30
+Deuses de pedra,2,2026-11-10,película,,17:00
+Chicho o mientras el cuerpo aguante (una comedia didáctica),2,2026-11-12,película,,17:00
+Ephemera,2,2026-11-12,película,,19:30
+The Man I Love,2,2026-11-12,película,,22:00
+A professora de francès,2,2026-11-13,película,,17:30
+Camp,2,2026-11-13,película,,19:30
+"Adolescencia, sexo y muerte en Campamento Miasma",2,2026-11-13,película,,22:00
+Seis meses en el edificio rosa con azul,2,2026-11-14,película,,17:30
+Elephants in the Fog,2,2026-11-14,película,,19:30
+Bearcave,2,2026-11-14,película,,22:00
+Tangles,2,2026-11-15,película,,17:30
+Coward,2,2026-11-15,película,,19:30
+Taiga,2,2026-11-15,película,,22:00
