@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/desplegable_eventos"
+        android:icon="@drawable/eventos" />
+
+    <item android:id="@+id/desplegable_calendario"
+        android:icon="@drawable/calendario" />
+
+    <item
+        android:id="@+id/desplegable_favs"
+        android:icon="@drawable/favs" />
+
+    <item
+        android:id="@+id/desplegable_salas"
+        android:icon="@drawable/salas" />
+
+    <item
+        android:id="@+id/desplegable_perfil"
+        android:icon="@drawable/perfil" />
+
+</menu>

@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ACI_App</string>
+    <string name="descrip_aci">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</string>
+    <string name="desc_logo">"El logo de la Agenda Cultural Independiente (ACI)"</string>
+    <string name="violetas">"Separador de elementos con la forma de tres caramelos de violetas"</string>
+    <string name="logo_navegacion">"Logo de la aplicación (ACI Madrid) que sirve como botón para navegar a la pantalla home"</string>
+    <string name="menu_desplegable">"Menú desplegable para navegar a otras pantallas"</string>
+    <string name="menu_eventos">"Eventos"</string>
+    <string name="menu_calendario">"Calendario"</string>
+    <string name="menu_favs">"Favoritos"</string>
+    <string name="menu_salas">"Salas"</string>
+    <string name="menu_perfil">"Perfil"</string>
+</resources>
