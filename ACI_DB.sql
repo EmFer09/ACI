@@ -63,3 +63,17 @@ ADD CONSTRAINT fk_salasfav_sala
 
 ALTER TABLE eventos
 ADD COLUMN hora TIME;
+
+ALTER TABLE eventos
+MODIFY COLUMN fecha_inicio DATE;
+
+CREATE TABLE eventos_backup AS
+SELECT * FROM eventos;
+
+-- Se añade una restricción para que no se añadan eventos duplicados al volver a ejecutar los scripts de los scrapers
+ALTER TABLE eventos
+ADD CONSTRAINT unique_pelicula
+UNIQUE (nombre, sala_id, fecha_inicio, hora, categoria),
+ADD CONSTRAINT unique_exposicion
+UNIQUE (nombre, sala_id, fecha_inicio, fecha_final, categoria);
+
