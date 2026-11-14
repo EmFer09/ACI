@@ -24,11 +24,10 @@
 
 
     <ImageView
-        android:id="@+id/Violetas"
         android:layout_width="200dp"
         android:layout_height="80dp"
         android:layout_marginTop="348dp"
-        android:contentDescription="@string/violetas"
+        android:contentDescription= "@null"
         android:scaleType="fitCenter"
         android:src="@drawable/violetas"
         app:layout_constraintEnd_toEndOf="parent"
@@ -47,6 +46,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.758" />
 
+    <!-- este es la barra inferior con el menú desplegable-->
     <include android:id="@+id/barra_inferior"
         layout="@layout/barra_inferior"
         android:layout_width="match_parent"
