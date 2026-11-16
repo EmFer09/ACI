@@ -12,4 +12,11 @@
     <string name="texto_eventos">¿Qué está pasando en la ciudad?</string>
     <string name="filtro_expos">Exposiciones</string>
     <string name="filtro_pelis">Películas</string>
-    </resources>
+    <string name="inicio_ses">Iniciar sesión</string>
+    <string name="email_sesion">Correo electrónico</string>
+    <string name="info_usuario">Información de usuario</string>
+    <string name="cambiar_contr">Cambiar contraseña</string>
+    <string name="eliminar_cuenta">Eliminar cuenta</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>

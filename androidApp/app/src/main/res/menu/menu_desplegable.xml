@@ -20,4 +20,8 @@
         android:id="@+id/desplegable_perfil"
         android:icon="@drawable/perfil" />
 
+    <item
+        android:id="@+id/desplegable_home"
+        android:icon="@drawable/home" />
+
 </menu>
