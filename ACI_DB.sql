@@ -77,3 +77,27 @@ UNIQUE (nombre, sala_id, fecha_inicio, hora, categoria),
 ADD CONSTRAINT unique_exposicion
 UNIQUE (nombre, sala_id, fecha_inicio, fecha_final, categoria);
 
+-- Durante el desarrollo de la API REST y el diseño de la app decidí que en la pantalla Salas se debería poder filtrar también por categoría
+ALTER TABLE salas
+ADD categoria VARCHAR(50);
+
+-- Añado las filas de las salas que tengo, más adelante haré web scrapers para que obtengan esta información automáticamente
+INSERT INTO salas (sala_id, nombre, web, direccion)
+VALUES
+    (1, "Cines Embajadores", "https://cinesembajadores.es/madrid/", "Glorieta Sta. María de la Cabeza, 5, Arganzuela, 28045 Madrid"),
+    (2, "Círculo de Bellas Artes", "https://www.circulobellasartes.com/cine-estudio/", "C. Alcalá, 42, Centro, 28014 Madrid, Spain"),
+    (5, "Museo Thyssen-Bornemisza", "https://www.museothyssen.org/exposiciones", "P.º del Prado, 8, Centro, 28014 Madrid, Spain");
+    
+UPDATE salas
+SET categoria = 'peliculas'
+WHERE sala_id = 1;
+
+UPDATE salas
+SET categoria = 'peliculas'
+WHERE sala_id = 2;
+
+UPDATE salas
+SET categoria = 'exposiciones'
+WHERE sala_id = 5;
+
+SELECT * FROM salas;
