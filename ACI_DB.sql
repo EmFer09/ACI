@@ -100,4 +100,11 @@ UPDATE salas
 SET categoria = 'exposiciones'
 WHERE sala_id = 5;
 
-SELECT * FROM salas;
+-- hago las columnas email y nombre en usuario UNIQUE para que no pueda haber duplicados
+ALTER TABLE usuario
+ADD CONSTRAINT unique_email
+UNIQUE (email);
+
+ALTER TABLE usuario
+ADD CONSTRAINT unique_nombre
+UNIQUE (user_name);
