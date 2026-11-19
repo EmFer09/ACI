@@ -1,6 +1,7 @@
 package com.aci.agendacultural;
 import android.os.Bundle;
 import android.widget.ImageButton;
+import android.util.Log;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.widget.PopupMenu;
@@ -11,6 +12,15 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 
+import com.aci.agendacultural.api.ApiService;
+import com.aci.agendacultural.api.RetrofitClient;
+import com.aci.agendacultural.model.Eventos;
+import java.util.List;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -19,10 +29,38 @@ public class MainActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         super.onCreate(savedInstanceState);
+        Log.d("API", "MainActivity iniciada");
 
         //para que la app use toda la pantalla de cada móvil
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
+
+        //peticion a api mediante retrofit
+        RetrofitClient retrofitClient = new RetrofitClient();
+        ApiService api = retrofitClient.getApi();
+
+        Call<List<Eventos>> call = api.findAll();
+
+        call.enqueue(new Callback<List<Eventos>>() {
+            @Override
+            public void onResponse(Call<List<Eventos>> call, Response<List<Eventos>> response) {
+                if (response.isSuccessful()) {
+                    List<Eventos> eventos = response.body();
+
+                    if (eventos != null) {
+                        Log.d("API", "Eventos recibidos: " + eventos.size());
+                    }
+                } else {
+                    Log.e("API", "Error HTTP: " + response.code());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Eventos>> call, Throwable t) {
+                Log.e("API", "Fallo de conexión: " + t.getMessage());
+            }
+        });
+
 
         //para que la barra de hora, batería, notificaciones de Android no interfiera con la app
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
