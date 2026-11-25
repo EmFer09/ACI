@@ -7,6 +7,6 @@ import java.util.List;
 @Repository
 public interface SalasRepository extends JpaRepository<Salas, Integer> {
 
-      List<Salas> getByCategoria(String categoria);
+      List<Salas> findSalasByCategoria(String categoria);
   
 }

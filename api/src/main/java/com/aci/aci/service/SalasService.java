@@ -23,8 +23,8 @@ public class SalasService {
         return salasRepository.findAll();
     }
 
-    public List<Salas> getSalasByCategoria(String categoria) {
-        return salasRepository.getByCategoria(categoria);
+    public List<Salas> findSalasByCategoria(String categoria) { // para la lista de salas en fragment salas
+        return salasRepository.findSalasByCategoria(categoria);
     }
 
     public Optional<Salas> getById(Integer id) { //filtrar por id para las fichas de las salas, igual que en eventos id

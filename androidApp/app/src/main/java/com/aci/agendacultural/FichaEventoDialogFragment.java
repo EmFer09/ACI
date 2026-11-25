@@ -13,8 +13,8 @@ public class FichaEventoDialogFragment extends DialogFragment {
     @Override
     public Dialog onCreateDialog(@Nullable Bundle savedInstanceState) {
         return new AlertDialog.Builder(requireContext())
-                .setMessage(getString(R.string.order_confirmation))
-                .setPositiveButton(getString(R.string.ok), (dialog, which) -> {} )
+                .setMessage("Info del evento")
+                .setPositiveButton("Aceptar", (dialog, which) -> {} )
                 .create();
     }
 

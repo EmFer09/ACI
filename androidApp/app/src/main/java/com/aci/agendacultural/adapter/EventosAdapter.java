@@ -2,6 +2,7 @@ package com.aci.agendacultural.adapter;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,10 +17,9 @@ import com.aci.agendacultural.model.Eventos;
 import java.util.List;
 
 
-public class EventosAdapter extends ArrayAdapter<Eventos> { //ArrayAdapter va a trabajar (contener) con objs de tipo Eventos (definido en model)
-    // desde donde se crea el adapter y para que pueda trabajar con los recursos (datos y xml)
-
-    // el constructor, así se podrá crear un nuevo adapter desde xej el EventosFragment
+public class EventosAdapter extends ArrayAdapter<Eventos> { /*ArrayAdapter va a trabajar (contener) con objs de tipo Eventos (definido en model)
+     desde donde se crea el adapter y para que pueda trabajar con los recursos (datos y xml)
+     el constructor, así se podrá crear un nuevo adapter desde xej el EventosFragment */
     public EventosAdapter(@NonNull Context context, int resource, @NonNull List<Eventos> listaEventos) {
         // llama al constructor de la clase ArrayAdapter de la que EventosAdapter hereda e indica los parámetros de esta clase
         super(context, resource, listaEventos);
@@ -74,46 +74,4 @@ public class EventosAdapter extends ArrayAdapter<Eventos> { //ArrayAdapter va a 
     }
 }
 
-/* ahora falta integrar con retrofit en el fragment el tutorial dice:
-public class MainActivity extends AppCompatActivity {
-    private ListView listView;
-    private ArrayList<BirdsList> birdsData = new ArrayList<>();
-    private BirdsAdapter adapter;
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        listView = findViewById(R.id.listView);
-        adapter = new BirdsAdapter(this, R.layout.birdslist, birdsData);
-        listView.setAdapter(adapter);
-
-        fetchBirdsFromApi();
-    }
-
-    private void fetchBirdsFromApi() {
-        Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl("https://api.example.com/")
-                .addConverterFactory(GsonConverterFactory.create())
-                .build();
-
-        ApiService apiService = retrofit.create(ApiService.class);
-        apiService.getBirds().enqueue(new Callback<List<BirdsList>>() {
-            @Override
-            public void onResponse(Call<List<BirdsList>> call, Response<List<BirdsList>> response) {
-                if (response.isSuccessful() && response.body() != null) {
-                    birdsData.clear();
-                    birdsData.addAll(response.body());
-                    adapter.notifyDataSetChanged(); // Actualizar la vista
-                }
-            }
-
-            @Override
-            public void onFailure(Call<List<BirdsList>> call, Throwable t) {
-                // Manejar error
-            }
-        });
-    }
-}
- */

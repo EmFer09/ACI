@@ -1,6 +1,7 @@
 package com.aci.agendacultural.api;
 
 import com.aci.agendacultural.model.Eventos;
+import com.aci.agendacultural.model.Salas;
 
 import java.util.List;
 import java.util.Map;
@@ -12,7 +13,7 @@ import retrofit2.http.Path;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
 
-// interfaz donde definir métodos que serán usados en las network transactions
+// interfaz donde definir métodos que serán usados en las network transactions (los endpoints de la API)
 
 public interface ApiService {
 
@@ -23,19 +24,24 @@ public interface ApiService {
     @GET("api/eventos")
     public Call<List<Eventos>> findAll();
 
-    //filtrar por id
+    //encontrar evento por id
     @GET("api/eventos/evento/{eventoId}")
     Call<Eventos> findById(@Path("eventoId") int eventoId);
 
-    //filtrar por categoría
+    //filtrar eventos por categoría
     @GET("api/eventos/{categoria}")
     Call<List<Eventos>> findByCategoria(@Path("categoria") String categoria);
 
-    //filtrar por sala
+    @GET("api/salas/categoria/{categoria}")
+    Call<List<Salas>> findSalasByCategoria(@Path("categoria") String categoria);
+
+    //filtrar por sala (para el Dialog de fichaSala)
     @GET("api/eventos/sala/{salaId}")
     Call<List<Eventos>> findBySala(@Path("salaId") int salaId);
 
     // filtrar eventos por fecha
     @GET("api/eventos/fecha/{fechaIntroducida}")
     Call<List<Eventos>> findByFecha(@Path("fechaIntroducida") String fecha);
+
+    //faltan los favoritos y los datos del perfil de usuario !!!!
 }

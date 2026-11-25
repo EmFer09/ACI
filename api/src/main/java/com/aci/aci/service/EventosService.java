@@ -28,7 +28,7 @@ public class EventosService {
     }
 
     public List<Eventos> getByCategoria(String categoria) { 
-        return eventosRepository.findByCategoria(categoria);
+        return eventosRepository.findByCategoriaOrderByFechaInicioAsc(categoria);
     }
 
     public List<Eventos> getBySalaId(Integer salaId){

@@ -1,5 +1,6 @@
 package com.aci.agendacultural;
 
+import android.media.quality.ActiveProcessingPicture;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -7,58 +8,89 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SalasFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import com.aci.agendacultural.adapter.SalasAdapter;
+import com.aci.agendacultural.api.ApiService;
+import com.aci.agendacultural.api.RetrofitClient;
+import com.aci.agendacultural.model.Salas;
+import com.google.android.material.button.MaterialButtonToggleGroup;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+
 public class SalasFragment extends Fragment {
+    private ListView lista_salas; // elemento en el xml
+    private List<Salas> listaSalas; // lista de objetos de la clase Salas(model)
+    private SalasAdapter adapter;
+    private ApiService apiService;
+    private MaterialButtonToggleGroup filtroCategorias;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public SalasFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SalasFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SalasFragment newInstance(String param1, String param2) {
-        SalasFragment fragment = new SalasFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
+    private void cargarSalas(String categoria) {
+        Call<List<Salas>> filtro = apiService.findSalasByCategoria(categoria);
+
+        filtro.enqueue(new Callback<List<Salas>>() {
+            @Override
+            public void onResponse(Call<List<Salas>> call, Response<List<Salas>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    listaSalas.clear();
+                    listaSalas.addAll(response.body());
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Salas>> call, Throwable throwable) {
+                throwable.printStackTrace();
+            }
+        });
     }
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_salas, container, false);
+        return inflater.inflate(R.layout.fragment_salas, container, false); // aquí decimos que View es el fragment_salas porque el metodo onCreateView lo ha devuelto
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        lista_salas = view.findViewById(R.id.lista_salas);
+        listaSalas = new ArrayList<>();
+        adapter = new SalasAdapter(requireContext(), R.layout.item_salas, listaSalas);
+        lista_salas.setAdapter(adapter);
+
+        filtroCategorias = view.findViewById(R.id.filtro_botones_pelis_expos);
+
+        RetrofitClient retrofitClient = new RetrofitClient();
+        apiService = retrofitClient.getApi();
+
+        cargarSalas("exposiciones");
+        filtroCategorias.addOnButtonCheckedListener((materialButtonToggleGroup, checkedId, isChecked) -> {
+            if (isChecked) {
+                if (checkedId == R.id.boton_expos) {
+                    cargarSalas("exposiciones");
+                } else if (checkedId == R.id.boton_pelis) {
+                    cargarSalas("peliculas");
+                }
+            }
+        });
+
+
+
+
     }
 }

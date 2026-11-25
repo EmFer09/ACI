@@ -22,8 +22,8 @@ public class SalasController {
     }
 
     @GetMapping("/categoria/{categoria}") //buscar salas por categoría
-    public  ResponseEntity<List<Salas>> findByCategoria(@PathVariable String categoria){
-        List<Salas> salas = salasService.getSalasByCategoria(categoria);
+    public  ResponseEntity<List<Salas>> findSalasByCategoria(@PathVariable String categoria){
+        List<Salas> salas = salasService.findSalasByCategoria(categoria);
         if (salas.isEmpty()) { 
             return ResponseEntity.notFound().build(); 
         } else {

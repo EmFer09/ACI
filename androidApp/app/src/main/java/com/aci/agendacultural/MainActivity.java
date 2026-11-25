@@ -29,7 +29,6 @@ public class MainActivity extends AppCompatActivity {
         AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
 
         super.onCreate(savedInstanceState);
-        Log.d("API", "MainActivity iniciada");
 
         //para que la app use toda la pantalla de cada móvil
         EdgeToEdge.enable(this);
@@ -47,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     List<Eventos> eventos = response.body();
 
-                    if (eventos != null) {
+                    if (eventos != null) { // mensajes para corroborar que los eventos cargan y por si no
                         Log.d("API", "Eventos recibidos: " + eventos.size());
                     }
                 } else {
