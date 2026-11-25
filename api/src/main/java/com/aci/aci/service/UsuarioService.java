@@ -40,7 +40,6 @@ public class UsuarioService {
             if (usuario.isEmpty()) {
                 return false;
             }
-
             return passwordEncoder.matches(contrasenyaEscrita, usuario.get().getContrasenyaHash()); //y si lo localiza compara la contraseña escrita con el hash de su contraseña guardado
     }
 

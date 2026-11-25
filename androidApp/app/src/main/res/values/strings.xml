@@ -21,4 +21,16 @@
     <string name="iniciar_sesion">Iniciar sesión</string>
     <string name="crear_cuenta">Crear cuenta</string>
     <string name="blank">blank</string>
+    <string name="titulo_del_evento">Título del evento</string>
+    <string name="nombre_de_la_sala">Nombre de la sala</string>
+    <string name="cuando_es">¿Cuándo es?</string>
+    <string name="dia_Evento">Día del evento</string>
+    <string name="hora_Evento">Hora del evento</string>
+    <string name="donde_es">¿Dónde es?</string>
+    <string name="direccion_Evento">Dirección del evento</string>
+    <string name="mas_info">Para saber un poco más</string>
+    <string name="descripcion_evento">Descripción del evento</string>
+    <string name="guardar">Guardar</string>
+    <string name="fecha_inicio">Fecha inicio</string>
+    <string name="fecha_final">Fecha final</string>
 </resources>

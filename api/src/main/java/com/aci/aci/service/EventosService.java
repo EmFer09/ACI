@@ -32,7 +32,7 @@ public class EventosService {
     }
 
     public List<Eventos> getBySalaId(Integer salaId){
-        return  eventosRepository.findBySalaId(salaId);
+        return  eventosRepository.findBySala_SalaId(salaId);
     }
 
     public  List<Eventos> getByFecha(LocalDate fecha){

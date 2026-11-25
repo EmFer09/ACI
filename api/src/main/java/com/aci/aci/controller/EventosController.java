@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 import java.time.LocalDate;
 
+// el controller define qué info devuelve el backend y se muestra en la app
 @RestController 
 @RequestMapping ("/api/eventos")
 public class EventosController {
@@ -24,7 +25,7 @@ public class EventosController {
 
     @GetMapping("/evento/{eventoId}") //entre paréntesis va lo que aparecerá en el url
     public  ResponseEntity<Eventos> findById(@PathVariable Integer eventoId){
-        Optional<Eventos> evento = eventosService.getById(eventoId); //si lo encuentra el controlador devuelve 200 o 404 not found
+        Optional<Eventos> evento = eventosService.getById(eventoId); //si lo encuentra el controlador devuelve 200 o 404 not found si no
         return evento.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
     

@@ -11,7 +11,8 @@ import retrofit2.http.GET;
 import retrofit2.http.Path;
 import retrofit2.http.Body;
 import retrofit2.http.POST;
-import okhttp3.ResponseBody;
+
+// interfaz donde definir métodos que serán usados en las network transactions
 
 public interface ApiService {
 

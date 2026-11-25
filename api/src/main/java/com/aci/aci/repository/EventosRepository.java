@@ -11,7 +11,7 @@ import java.time.LocalDate;
 public interface EventosRepository extends JpaRepository<Eventos, Integer> { //<Eventos, int> porque coge el eventosID que es de tipo int
     //declaro métodos para hacer las búsquedas que voy a necesitar que no son operaciones básicas ya cargadas porel JpaRepository
     List<Eventos> findByCategoria(String categoria);
-    List<Eventos> findBySalaId(Integer salaId);
+    List<Eventos> findBySala_SalaId(Integer salaId); //porque ahora salaId pertenece a Salas, no a Eventos para que se muestre el nombre en la app
     
     /*la consulta de fecha es más complicada porque las películas no tienn fecha final y no se puede solo filtrar por fechaInicio 
     porque si se selecciona una fecha entre fechaInicio y fechaFinal no se devolverá ese evento (exposiciones)

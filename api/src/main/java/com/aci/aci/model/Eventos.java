@@ -4,6 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -18,7 +20,12 @@ public class Eventos {
     private int eventoId;
 
     private String nombre;
-    private int salaId;
+    
+    // en la app quiero que se muestre el nombre de la sala, no el ID entonces hay que hacer un inner join con la tabla Salas para obtener el nombre
+    @ManyToOne
+    @JoinColumn(name = "salaId")
+    private Salas sala;
+
     private LocalDate fechaInicio;
     private LocalDate fechaFinal;
     private String categoria;
@@ -30,9 +37,9 @@ public class Eventos {
     }
 
     //constructor con todos los argumentos menos el Id
-    public Eventos(String nombre, int salaId, LocalDate fechaInicio, LocalDate fechaFinal, String categoria, String descripcion, LocalTime hora) {
+    public Eventos(String nombre, Salas sala, LocalDate fechaInicio, LocalDate fechaFinal, String categoria, String descripcion, LocalTime hora) {
         this.nombre = nombre;
-        this.salaId = salaId;
+        this.sala = sala;
         this.fechaInicio = fechaInicio;
         this.fechaFinal = fechaFinal;
         this.categoria = categoria;
@@ -49,7 +56,7 @@ public class Eventos {
         this.eventoId = eventoId;
     }
 
-        public String getNombre() {
+    public String getNombre(){
         return nombre;
     }
 
@@ -57,12 +64,12 @@ public class Eventos {
         this.nombre = nombre;
     }
 
-    public int getSalaId() {
-        return salaId;
+    public Salas getSala() {
+        return sala;
     }
 
-    public void setSalaId(int salaId) {
-        this.salaId = salaId;
+    public void setSala(Salas sala) {
+        this.sala = sala;
     }
 
     public LocalDate getFechaInicio() {

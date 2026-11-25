@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         EdgeToEdge.enable(this);
         setContentView(R.layout.activity_main);
 
-        //peticion a api mediante retrofit
+        //petició  n a api mediante retrofit
         RetrofitClient retrofitClient = new RetrofitClient();
         ApiService api = retrofitClient.getApi();
 

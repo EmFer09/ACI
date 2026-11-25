@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="@string/titulo_del_evento"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:id="@id/tituloEventoFicha"
+        />
+
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="16dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tituloEventoFicha"
+        android:text="@string/nombre_de_la_sala"
+        android:textColor="#4c8596"
+        android:id="@id/nombreSalaFichaEv"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/nombreSalaFichaEv"
+        android:text="@string/dia_Evento"
+        android:id="@id/diaEvento" />
+
+    <TextView
+        android:id="@id/separadorFechas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/diaEvento"
+        app:layout_constraintTop_toTopOf="@id/diaEvento"
+        android:text=" - "
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@id/fechaFinalEv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/separadorFechas"
+        app:layout_constraintTop_toTopOf="@id/diaEvento"
+        android:text="@string/fecha_final"
+        android:visibility="visible" />
+
+    <TextView
+        android:id="@id/horaEvento"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/fechaFinalEv"
+        app:layout_constraintTop_toTopOf="@id/fechaFinalEv"
+        android:text="@string/hora_Evento"
+        android:layout_marginStart="12dp"
+        android:visibility="visible" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

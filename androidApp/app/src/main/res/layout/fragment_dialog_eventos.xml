@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginStart="16dp"
+    android:layout_marginEnd="16dp"
+    android:layout_height="580dp"
+    app:cardCornerRadius="28dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#F3EDE5">
+
+        <TextView
+            android:id="@+id/tituloEventoFicha"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="12dp"
+            android:text="@string/titulo_del_evento"
+            android:textStyle="bold"
+            android:textSize="38sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tituloEventoFicha"
+            android:id="@+id/nombreSalaFichaEv"
+            android:text="@string/nombre_de_la_sala"
+            android:layout_marginStart="12dp"
+            android:layout_marginTop="8dp"
+            android:textSize="22sp"
+            />
+        <!-- que este textview lleve a la ficha de la sala-->
+
+        <ImageView
+            android:layout_width="200dp"
+            android:layout_height="80dp"
+            android:contentDescription="@null"
+            android:src="@drawable/violetas"
+            app:layout_constraintTop_toBottomOf="@id/nombreSalaFichaEv"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="4dp"
+            android:id="@+id/violetasEv" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/violetasEv"
+            app:layout_constraintTop_toTopOf="@id/violetasEv">
+            <Button
+                android:id="@+id/boton_corazon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:backgroundTint="@android:color/transparent"
+                android:drawableTop="@drawable/corazon"
+                android:text="@string/guardar"
+                android:textColor="#706D69"
+                android:textSize="12sp"
+                android:drawablePadding="2dp"
+                android:elevation="0dp"
+                android:stateListAnimator="@null" />
+        </LinearLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toBottomOf="@id/violetasEv">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:layout_marginStart="12dp"
+                    android:text="@string/cuando_es"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:id="@+id/cuandoEs"/>
+
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cuandoEs"
+                    android:layout_marginStart="12dp"
+                    android:id="@+id/diaEvento"
+                    android:textSize="18sp"
+                    android:text="@string/dia_Evento"/>
+
+                <TextView
+                    android:id="@+id/separadorFechas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/diaEvento"
+                    app:layout_constraintTop_toTopOf="@id/diaEvento"
+                    android:text=" - "
+                    android:visibility="visible" />
+
+                <TextView
+                    android:id="@+id/fechaFinalEv"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/separadorFechas"
+                    app:layout_constraintTop_toTopOf="@id/separadorFechas"
+                    android:text="@string/fecha_final"
+                    android:textSize="18sp"
+                    android:visibility="visible" />
+
+
+                <TextView
+                    android:id="@+id/horaEvento"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/fechaFinalEv"
+                    app:layout_constraintTop_toTopOf="@id/fechaFinalEv"
+                    android:text="@string/hora_Evento"
+                    android:layout_marginStart="12dp"
+                    android:textSize="18sp"
+                    android:visibility="visible" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="@id/diaEvento"
+                    app:layout_constraintTop_toBottomOf="@id/diaEvento"
+                    android:text="@string/donde_es"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:id="@+id/dondeEs"
+                    android:layout_marginTop="14dp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/dondeEs"
+                    android:layout_marginStart="12dp"
+                    android:id="@+id/direccionEvento"
+                    android:textSize="18sp"
+                    android:text="@string/direccion_Evento" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/direccionEvento"
+                    android:layout_marginTop="14dp"
+                    android:layout_marginStart="12dp"
+                    android:id="@+id/masInfo"
+                    android:textStyle="bold"
+                    android:textSize="18sp"
+                    android:text="@string/mas_info" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/masInfo"
+                    android:layout_marginStart="12dp"
+                    android:id="@+id/descripcionEvento"
+                    android:textSize="18sp"
+                    android:text="@string/descripcion_evento" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
+
